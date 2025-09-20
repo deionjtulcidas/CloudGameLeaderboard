@@ -145,10 +145,8 @@
   </div>
 
   <script>
-    // Replace with your API Gateway endpoints
-    const API_BASE = "https://93jftn15ic.execute-api.us-east-1.amazonaws.com/$default";
+    https://<93fltn15ic>.execute-api.<us-east-1>.amazonaws.com
     const WS_URL = "wss://9gizgxl8hf.execute-api.us-east-1.amazonaws.com/dev";
-
     const form = document.getElementById("scoreForm");
 
     form.addEventListener("submit", async (e) => {
@@ -193,9 +191,9 @@
     // WebSocket for live updates
     const ws = new WebSocket(WS_URL);
 
-    ws.onopen = () => console.log("✅ Connected to WebSocket");
+    ws.onopen = () => console.log(" Connected to WebSocket");
     ws.onmessage = () => fetchLeaderboard();
-    ws.onclose = () => console.log("❌ WebSocket disconnected");
+    ws.onclose = () => console.log(" WebSocket disconnected");
     ws.onerror = (err) => console.error("⚠️ WebSocket error:", err);
 
     // Load leaderboard on page load
