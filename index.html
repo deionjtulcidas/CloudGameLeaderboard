@@ -146,32 +146,33 @@
 
   <script>
     // Replace this with your real API Gateway ID
-    const API_BASE = "https://<9gizgxl8hf>.execute-api.us-east-1.amazonaws.com/$default";
-    const WS_URL = "wss://9gizgxl8hf.execute-api.us-east-1.amazonaws.com/dev";
+    const API_BASE = "https://93jftn15ic.execute-api.us-east-1.amazonaws.com"; 
+// WebSocket API (for real-time updates)
+  const WS_URL = "wss://9gizgxl8hf.execute-api.us-east-1.amazonaws.com/dev";
 
-    const form = document.getElementById("scoreForm");
+const form = document.getElementById("scoreForm");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const userId = document.getElementById("userId").value;
-      const score = parseInt(document.getElementById("score").value, 10);
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const userId = document.getElementById("userId").value;
+  const score = parseInt(document.getElementById("score").value, 10);
 
-      try {
-        const res = await fetch(`${API_BASE}/scores`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ gameId: "game1", userId, score }),
-        });
-
-        if (!res.ok) throw new Error("Failed to submit score");
-
-        form.reset();
-        fetchLeaderboard();
-      } catch (err) {
-        console.error("Error submitting score:", err);
-        alert("Error submitting score");
-      }
+  try {
+    const res = await fetch(`${API_BASE}/scores`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ gameId: "game1", userId, score }),
     });
+
+    if (!res.ok) throw new Error(`Failed to submit score: ${res.statusText}`);
+
+    form.reset();
+    fetchLeaderboard();
+  } catch (err) {
+    console.error("Error submitting score:", err);
+    alert("Error submitting score");
+  }
+});
 
     async function fetchLeaderboard() {
       try {
