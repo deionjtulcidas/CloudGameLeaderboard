@@ -20,7 +20,7 @@
     }
 
     header img {
-      max-height: 80px;
+      max-height: 100px;
       display: block;
       margin: 0 auto 10px;
     }
@@ -114,7 +114,7 @@
 </head>
 <body>
   <header>
-    <img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Pittsburgh_Panthers_logo.svg" alt="Pitt Panthers Logo">
+    <img src="pitt-logo.png" alt="Pitt Panthers Logo">
     <h1>Pitt Panthers Cloud Leaderboard</h1>
   </header>
 
@@ -145,8 +145,10 @@
   </div>
 
   <script>
-    https://<93fltn15ic>.execute-api.<us-east-1>.amazonaws.com
+    // Replace this with your real API Gateway ID
+    const API_BASE = "https://<YOUR_API_ID>.execute-api.us-east-1.amazonaws.com/$default";
     const WS_URL = "wss://9gizgxl8hf.execute-api.us-east-1.amazonaws.com/dev";
+
     const form = document.getElementById("scoreForm");
 
     form.addEventListener("submit", async (e) => {
@@ -191,9 +193,9 @@
     // WebSocket for live updates
     const ws = new WebSocket(WS_URL);
 
-    ws.onopen = () => console.log(" Connected to WebSocket");
+    ws.onopen = () => console.log("✅ Connected to WebSocket");
     ws.onmessage = () => fetchLeaderboard();
-    ws.onclose = () => console.log(" WebSocket disconnected");
+    ws.onclose = () => console.log("❌ WebSocket disconnected");
     ws.onerror = (err) => console.error("⚠️ WebSocket error:", err);
 
     // Load leaderboard on page load
@@ -201,4 +203,3 @@
   </script>
 </body>
 </html>
-
