@@ -162,7 +162,11 @@
         const res = await fetch(`${API_BASE}/scores`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ gameId: "game1", userId, score }),
+          body: JSON.stringify({
+            gameId: "game1",
+            userId: userId,
+            score: score
+          }),
         });
 
         const data = await res.json();
