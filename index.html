@@ -138,31 +138,43 @@
       </thead>
       <tbody></tbody>
     </table>
+  </div>
 
   <script>
-    // Use the dev stage URL
+    // Correct API Gateway base URL ($default stage, API ID bsbgvydek1)
     const API_BASE = "https://bsbgvydek1.execute-api.us-east-1.amazonaws.com";
+
     const form = document.getElementById("scoreForm");
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const userId = document.getElementById("userId").value;
+      const userId = document.getElementById("userId").value.trim();
       const score = parseInt(document.getElementById("score").value, 10);
 
+      if (!userId || isNaN(score)) {
+        alert("Please enter both a name and a score.");
+        return;
+      }
+
       try {
+        console.log("Submitting score:", { gameId: "game1", userId, score });
+
         const res = await fetch(`${API_BASE}/scores`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ gameId: "game1", userId, score }),
         });
 
-        if (!res.ok) throw new Error(`Failed to submit score: ${res.statusText}`);
+        const data = await res.json();
+        console.log("Server response:", data);
+
+        if (!res.ok) throw new Error(`Failed to submit score: ${res.status} ${res.statusText}`);
 
         form.reset();
         fetchLeaderboard();
       } catch (err) {
         console.error("Error submitting score:", err);
-        alert("Error submitting score");
+        alert("Error submitting score. Check the console for details.");
       }
     });
 
@@ -170,6 +182,8 @@
       try {
         const res = await fetch(`${API_BASE}/leaderboard?gameId=game1&limit=10`);
         const data = await res.json();
+
+        console.log("Fetched leaderboard:", data);
 
         const tbody = document.querySelector("#leaderboardTable tbody");
         tbody.innerHTML = "";
