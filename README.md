@@ -1,41 +1,33 @@
+Pitt Panthers Cloud Leaderboard
 
-## Features
-- **Frontend**: Responsive HTML/CSS/JS site hosted on Amazon S3 (static website hosting).
-  **Backend**: Serverless APIs powered by Amazon API Gateway + AWS Lambda.
-  **Database**: Amazon DynamoDB for storing and retrieving player scores.
-  **Real-time**: Scores update instantly using WebSocket APIs and broadcast Lambda functions.
-  **CORS Configured**: Fully working browser-to-API requests.
+This project is a cloud-hosted leaderboard where players can submit scores and view rankings through a web interface. It was built using AWS services including S3 for hosting, API Gateway for routing, Lambda for serverless backend logic, and DynamoDB for storage.
 
----
+The goal was to create a serverless application that demonstrates how data can flow from a user-facing website into AWS infrastructure, update a database, and then be displayed back to the user in real time.
 
-## Architecture
-1. **Frontend** hosted on S3 → connects to API Gateway.  
-2. **API Gateway** routes requests to Lambda functions.  
-3. **Lambda** functions handle `POST /scores` (write to DynamoDB) and `GET /leaderboard` (query top scores).  
-4. **DynamoDB Streams + Broadcast Lambda** push updates via WebSocket API.  
+Features
 
----
+Static website hosted on Amazon S3
 
-## Problems I Overcame
-- **API Gateway not resolving**: Had to reconfigure stages (`$default`) and redeploy routes properly.  
-- **"Not Found" errors**: Solved by verifying stage + route integration with Lambda.  
-- **CORS issues in browser**: Fixed by correctly setting `Access-Control-Allow-Origin`, `Content-Type` headers, and redeploying.  
-- **Lambda debugging**: Used CloudWatch logs to trace incoming events and validate JSON parsing.  
+REST API built with API Gateway
 
-This process showed how critical **deployment stages**, **CORS**, and **integration requests** are when building cloud-native apps.
+Lambda functions for processing score submissions
 
----
+DynamoDB table for storing and retrieving leaderboard data
 
-## How to Use
-2. Submit a score using your name and value.  
-3. Watch the leaderboard update with new entries in real time.
+Basic CORS setup to allow the site to communicate with the API
 
----
+Challenges
 
-## Skills Demonstrated
-- AWS Lambda  
-- Amazon API Gateway (HTTP + WebSocket APIs)  
-- Amazon DynamoDB (+ Streams)  
-- Amazon S3 (static hosting)  
-- CloudWatch monitoring/logs  
-- Debugging CORS and deployment issues  
+While working on this project, I ran into several issues with API Gateway deployments, CORS errors, and getting Lambda and DynamoDB to connect correctly. These were resolved by carefully configuring API Gateway routes and enabling CORS for the right methods and origins.
+
+How it works
+
+The frontend is a simple HTML and JavaScript site styled with Pitt Panthers colors.
+
+Users submit their name and score through the form.
+
+The request is sent to the API Gateway endpoint.
+
+A Lambda function processes the request and stores the score in DynamoDB.
+
+The leaderboard fetches updated scores and displays them on the site.
