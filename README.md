@@ -20,7 +20,7 @@ Basic CORS setup to allow the site to communicate with the API
 
 While working on this project, I ran into several issues with API Gateway deployments, CORS errors, and getting Lambda and DynamoDB to connect correctly. These were resolved by carefully configuring API Gateway routes and enabling CORS for the right methods and origins.
 
-How it works
+## How it works
 
 The frontend is a simple HTML and JavaScript site styled with Pitt Panthers colors.
 
