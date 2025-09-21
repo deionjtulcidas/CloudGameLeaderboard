@@ -1,10 +1,4 @@
 
-A modern cloud-based leaderboard application built using AWS services
-
-This project demonstrates real-world cloud engineering skills, including serverless APIs, database integration, static hosting, and real-time updates.
-
----
-
 ## Features
 - **Frontend**: Responsive HTML/CSS/JS site hosted on Amazon S3 (static website hosting).
   **Backend**: Serverless APIs powered by Amazon API Gateway + AWS Lambda.
